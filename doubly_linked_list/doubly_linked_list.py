@@ -68,7 +68,6 @@ class DoublyLinkedList:
             self.tail = None
         else:
             # currentHead = self.head
-            # followingHead = currentHead.next
             # self.head = followingHead
             # self.head = self.head.delete()
             followingHead = self.head.next

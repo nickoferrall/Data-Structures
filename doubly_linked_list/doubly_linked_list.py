@@ -52,28 +52,34 @@ class DoublyLinkedList:
         return self.length
 
     def add_to_head(self, value):
+        new_node = ListNode(value)
         if self.length == 0:
-            self.head = value
-            self.tail = value
-        else:
-            currentHead = self.head
-            newNode = ListNode(value, None, currentHead)
-            self.head = newNode
-        self.length += 1
-        return self
-
-    def remove_from_head(self):
-        if self.length <= 1:
-            self.head = None
-            self.tail = None
+            self.head = new_node
+            self.tail = new_node
         else:
             # currentHead = self.head
-            # self.head = followingHead
-            # self.head = self.head.delete()
-            followingHead = self.head.next
-            self.head = followingHead
-        self.length -= 1
-        return self.head
+            # new_node = ListNode(value, None, currentHead)
+            # self.head = new_node
+            self.head.prev = new_node
+            self.head.prev.next = self.head
+            self.head = new_node
+        self.length += 1
+        print("Head:", new_node)
+        # return self.length
+
+    # def remove_from_head(self):
+    #     oldHead = self.head
+    #     if self.length <= 1:
+    #         self.head = None
+    #         self.tail = None
+    #     else:
+    #         self.head = oldHead.next
+    #         self.head.prev = None
+    #         oldHead.next = None
+    #         # followingHead = self.head.next
+    #         # self.head = followingHead
+    #     self.length -= 1
+    #     return self.length
 
     def add_to_tail(self, value):
         pass
@@ -100,7 +106,7 @@ my_test = DoublyLinkedList(10)
 
 # print(my_node.insert_after(180))
 # print(my_node.prev)
-my_test.add_to_head(180)
+print(my_test.add_to_head(180))
 # my_test.add_to_head(280)
 # my_test.add_to_head(2800)
 print(my_test.remove_from_head())

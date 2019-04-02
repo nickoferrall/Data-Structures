@@ -29,9 +29,10 @@ class Queue:
             return None
         elif self.first == self.last:
             self.last = None
+        temp = self.first
         self.first = self.first.next
         self.size -= 1
-        return self.size
+        return temp.value
 
     def len(self):
         return self.size
@@ -39,9 +40,12 @@ class Queue:
 
 q = Queue()
 
-print(q.enqueue(20))
-print(q.enqueue(200))
+print(q.enqueue(100))
+print(q.enqueue(101))
+print(q.enqueue(105))
 print(q.first.value)
 # print(q.dequeue())
+# print(q.first.value)
+# print(q.size)
+print(q.dequeue())
 print(q.first.value)
-print(q.size)

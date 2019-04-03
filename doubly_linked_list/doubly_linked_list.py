@@ -114,69 +114,38 @@ class DoublyLinkedList:
                 self.head.value = current.next.value
                 self.head.next.value = temp
                 count += 1
-            temp = current
-            self.head.insert_before(temp.value)
-            current.next = current.prev
-            current.delete()
-            self.head = self.head.prev
         return self.head.value
 
-    # def move_to_front(self, node):
-    #     if self.head == None:
-    #         return 'List Empty'
-    #     else:
-    #         curr_node = self.head
-    #         while True:
-    #             # if curr_node matches passed in node
-    #             if curr_node == node:
-    #                 # self.add_to_head(curr_node.value)
-    #                 self.head.insert_before(node)
-    #                 # delete curr_node
-    #                 curr_node.delete()
-    #             # else:
-    #             else:
-    #                 # curr_node = curr_node.next
-    #                 curr_node = curr_node.next
+    def move_to_end(self, node):
+        self.tail.insert_after(node.value)
+        self.tail = self.tail.next
+        if node is self.head:
+            self.head = self.head.next
+        node.delete()
+
+    def delete(self, node):
+        if node is self.head:
+            self.head = self.head.next
+        if node is self.tail:
+            self.tail = self.tail.prev
+        node.delete()
+        self.length -= 1
+
+    def get_max(self):
+        if self.head is None:
+            return None
+        current_max = self.head.value
+        current_node = self.head.next
+        while current_node:
+            if current_node.value > current_max:
+                current_max = current_node.value
+            current_node = current_node.next
+        return current_max
 
     def print(self):
         arr = []
-        current = self.head
-        while current:
-            arr.append(current.value)
-            current = current.next
-        print('Arr:', arr)
-
-    def move_to_end(self, node):
-        pass
-
-    def delete(self, node):
-        pass
-
-    def get_max(self):
-        pass
-
-
-my_value = ListNode(100)
-my_test = DoublyLinkedList(my_value)
-
-
-# my_node = ListNode(14)
-
-# print(my_node.insert_after(180))
-# print(my_node.prev)
-# print(my_test.add_to_head(275))
-# my_test.add_to_head(280)
-# my_test.add_to_head(2800)
-# print(my_test.remove_from_head())
-# print(my_test.add())
-my_test.add_to_tail(3)
-my_test.add_to_head(29)
-# print(my_test.add_to_tail(1080))
-# print(my_test.add_to_tail(293))
-# print(my_test.add_to_tail(1340))
-
-# print(my_test.remove_from_tail())
-
-print(my_test.move_to_front(100))
-
-# print(my_test.print())
+        test = self.head
+        while test:
+            arr.append(test.value)
+            test = test.next
+        return arr
